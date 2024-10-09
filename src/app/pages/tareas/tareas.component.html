@@ -1,0 +1,54 @@
+<div class="container">
+  <div *ngIf="!_edit" class="row justify-content-end mt-4 mb-4">
+    <div class="col-3">
+      <button type="button" class="btn btn-primary" (click)="edit(0)">
+        Agregar
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="!_edit" class="row justify-content-center mt-4">
+    <div class="col-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col" class="text-center">Id</th>
+            <th scope="col" class="text-center">Descripción</th>
+            <th scope="col" class="text-center">Fecha Creación</th>
+            <th scope="col" class="text-center">Estado</th>
+            <th scope="col" class="text-center">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of items">
+            <td class="text-center">{{ item.id }}</td>
+            <td>{{ item.descripcion }}</td>
+            <td class="text-center">
+              {{ item.fecha_creacion | date : "short" }}
+            </td>
+            <td class="text-center">{{ item.estado }}</td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-warning me-2"
+                (click)="edit(item.id)"
+              >
+                Modificar</button
+              ><button
+                type="button"
+                class="btn btn-danger"
+                (click)="delete(item.id)"
+              >
+                Eliminar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div *ngIf="_edit" class="row justify-content-center mt-4">
+    <app-tarea [id]="id" (_regresar)="regresar($event)"></app-tarea>
+  </div>
+</div>
